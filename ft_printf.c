@@ -10,16 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_print.h"
+#include "ft_printf.h"
 
 /*%c Imprime un solo carácter[v].
   %s Imprime una string[v] (como se define por defecto en C).
-  %p El puntero void * dado como argumento se imprime en formato hexadecimal.[f]
+  %p El puntero void * dado como argumento se imprime en formato hexadecimal.[v]
   %d Imprime un número decimal[v] (base 10).
   %i Imprime un entero en base 10.[v]
   %u Imprime un número decimal (base 10) sin signo.[f]
   %x Imprime un número hexadecimal (base 16) en minúsculas.[v]
-  %X Imprime un número hexadecimal (base 16) en mayúsculas.[f]
+  %X Imprime un número hexadecimal (base 16) en mayúsculas.[v]
   % % para imprimir el símbolo del porcentaje.*/
 
 
@@ -58,18 +58,47 @@ int ft_functions(char symbol, va_list args)
   if (symbol == 'd' || symbol == 'i')
     return(ft_putnbr(va_arg(args, int)));
   if (symbol == 'x')
-    return(ft_putnbr_base(va_arg(args, unsigned int), "0123456789abcdef"));
+    return(ft_putnbr_base(va_arg(args, unsigned long), "0123456789abcdef"));
+  if (symbol == 'p')
+    return(ft_putptr(va_arg(args, void *), "0123456789abcdef"));
   if (symbol == 'X')
-    return(ft_putnbr_base(va_arg(args, unsigned int), "0123456789ABCDEF"));
+    return(ft_putnbr_base(va_arg(args, unsigned long), "0123456789ABCDEF"));
+  if (symbol == 'u')
+    return(ft_putnbr_unsigned(va_arg(args, unsigned int), "0123456789"));
+  if (symbol == '%')
+  {
+    return(ft_putchar('%'));
+  }
   return(0);
 }
-int ft_putnbr_base(unsigned int n, char *base)
+int ft_putptr(void *n, char *base)
+{
+  ft_putstr("0x");
+  return(ft_putnbr_base((unsigned long)n, base) + 2);
+
+}
+int ft_putnbr_base(unsigned long n, char *base)
 {
   unsigned int len;
 
   len = ft_strlen(base);
-   
-	if (n >= len)
+
+  if (n >= len)
+  {
+		ft_putnbr_base(n / len, base);
+		ft_putnbr_base(n % len, base);
+	}
+  else
+    ft_putchar(base[n % len]);
+  return(ft_lennbr_base(n, base));
+}
+int ft_putnbr_unsigned(unsigned int n, char *base)
+{
+  unsigned int len;
+
+  len = ft_strlen(base);
+
+  if (n >= len)
   {
 		ft_putnbr_base(n / len, base);
 		ft_putnbr_base(n % len, base);
@@ -85,7 +114,6 @@ int ft_lennbr_base(int n, char *base)
 
   x = ft_strlen(base);
   len = 0;
-  
   while(n)
   {
     n /= x;
@@ -104,7 +132,7 @@ int	ft_putstr(char *s)
 
 	i = 0;
 	if (!s)
-		return(0);
+		return(write(1, "(null)", 6));
 	while (s[i] != '\0')
 	{
 		ft_putchar(s[i]);

@@ -13,14 +13,13 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-NAME = libft.a
+NAME = libftprintf.a
 
 COMPILE = ${CC} ${CFLAGS}
 
-SRC = 
+SRC = ft_printf.c 
 
 OBJ = ${SRC:%.c=%.o} 
-OBJ_BONUS = ${SRCBONUS:%.c=%.o}
 
 all: ${NAME}
 
@@ -28,7 +27,7 @@ ${NAME}: ${OBJ}
 	ar -rcs ${NAME} ${OBJ}
 
 
-%.o: %.c
+%.o:%.c	
 	$(COMPILE) -c $< -o $@
 
 # Cleaning
