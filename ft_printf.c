@@ -1,15 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print.c                                         :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bargarci <bargarci@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/19 00:23:01 by bargarci          #+#    #+#             */
-/*   Updated: 2023/06/01 22:47:04 by bargarci         ###   ########.fr       */
+/*   Created: 2023/06/08 21:32:34 by bargarci          #+#    #+#             */
+/*   Updated: 2023/06/08 21:32:45 by bargarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "ft_printf.h"
 
 /*%c Imprime un solo carácter[v].
@@ -56,13 +55,13 @@ int	ft_functions(char symbol, va_list args)
 	if (symbol == 'd' || symbol == 'i')
 		return (ft_putnbr(va_arg(args, int)));
 	if (symbol == 'x')
-		return (ft_putnbr_base(va_arg(args, unsigned long),
+		return (ft_putnbr_base(va_arg(args, unsigned long long),
 				"0123456789abcdef"));
 	if (symbol == 'p')
 		return (ft_putptr(va_arg(args, void *),
 				"0123456789abcdef"));
 	if (symbol == 'X')
-		return (ft_putnbr_base(va_arg(args, unsigned long),
+		return (ft_putnbr_base(va_arg(args, unsigned long long),
 				"0123456789ABCDEF"));
 	if (symbol == 'u')
 		return (ft_putnbr_unsigned(va_arg(args, unsigned int),
@@ -77,10 +76,10 @@ int	ft_functions(char symbol, va_list args)
 int	ft_putptr(void *n, char *base)
 {
 	ft_putstr("0x");
-	return (ft_putnbr_base((unsigned long)n, base) + 2);
+	return (ft_putnbr_base((unsigned long long)n, base) + 2);
 }
 
-int	ft_putnbr_base(unsigned long n, char *base)
+int	ft_putnbr_base(unsigned long long n, char *base)
 {
 	unsigned int	len;
 
@@ -110,7 +109,7 @@ int	ft_putnbr_unsigned(unsigned int n, char *base)
 	return (ft_lennbr_base(n, base));
 }
 
-int	ft_lennbr_base(int n, char *base)
+int	ft_lennbr_base(unsigned long long n, char *base)
 {
 	int				len;
 	unsigned int	x;
@@ -122,6 +121,8 @@ int	ft_lennbr_base(int n, char *base)
 		n /= x;
 		len++;
 	}
+	if (len == 0)
+		len++;
 	return (len);
 }
 

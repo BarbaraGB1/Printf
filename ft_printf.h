@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bargarci <bargarci@student.42madrid>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/08 21:32:58 by bargarci          #+#    #+#             */
+/*   Updated: 2023/06/08 21:33:02 by bargarci         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
@@ -5,8 +16,8 @@
 # include	<unistd.h>
 
 int		ft_printf(char const *str, ...);
-int		ft_putnbr_base(unsigned long n, char *base);
-int		ft_lennbr_base(int n, char *base);
+int		ft_putnbr_base(unsigned long long n, char *base);
+int		ft_lennbr_base(unsigned long long n, char *base);
 int		ft_putptr(void *n, char *base);
 int		ft_strlen(const char *s);
 int		ft_functions(char symbol, va_list args);
