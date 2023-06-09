@@ -17,6 +17,8 @@ int	main(void)
 	// printf(" \n count %d", count);
 	// // count = ft_printf("%p", ptr);
 	// printf("Hello %c \n %d \n %s \n %x \n %X \n %p \n %u", 'A', 1234, "tonto", 2343544, 23434345, ptr, 0);
-	printf("%i \n", ft_printf("%p", ""));
+	//printf("%i", ft_printf("%p\n", NULL));
+	//printf("%i", ft_printf("%p\n", NULL));
+	printf("%i", ft_printf("%u", 0));
 	return (0);
 }

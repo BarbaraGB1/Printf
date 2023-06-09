@@ -16,9 +16,9 @@
 # include	<unistd.h>
 
 int		ft_printf(char const *str, ...);
-int		ft_putnbr_base(unsigned long long n, char *base);
+int		ft_putnbr_base(unsigned int n, char *base);
 int		ft_lennbr_base(unsigned long long n, char *base);
-int		ft_putptr(void *n, char *base);
+int		ft_putptr(unsigned long long n, char *base);
 int		ft_strlen(const char *s);
 int		ft_functions(char symbol, va_list args);
 int		ft_putnbr_unsigned(unsigned int n, char *base);
@@ -27,5 +27,8 @@ int		ft_putstr(char *s);
 int		ft_putnbr(int n);
 void	ft_putnbr2(int n);
 int		ft_lennbr(int n);
+int		ft_putnbr_base_hex(unsigned long long n, char *base);
+int		ft_lennbr_base_hex(unsigned long long n);
+int		ft_put_hex(unsigned int n, char *base);
 
 #endif
